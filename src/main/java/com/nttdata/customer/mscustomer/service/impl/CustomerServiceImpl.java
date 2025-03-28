@@ -1,6 +1,6 @@
 package com.nttdata.customer.mscustomer.service.impl;
 
-import com.nttdata.customer.mscustomer.Util.CustomerMapper;
+import com.nttdata.customer.mscustomer.util.CustomerMapper;
 import com.nttdata.customer.mscustomer.model.CustomerDTO;
 import com.nttdata.customer.mscustomer.repository.CustomerRepository;
 import com.nttdata.customer.mscustomer.service.CustomerService;
@@ -66,21 +66,19 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Mono<ResponseEntity<Void>> modifyCustomer(String id, Mono<Customer> customer) {
         return customerRepository.findById(id)
-                .flatMap(existingCustomerDTO -> {
-                    return customer
-                            .flatMap(updatedCustomer -> {
-                                CustomerDTO customerDTO = customerMapper.toOpenApiCustomer(updatedCustomer);
-                                existingCustomerDTO.setDni(customerDTO.getDni());
-                                existingCustomerDTO.setCustomertype(customerDTO.getCustomertype());
-                                existingCustomerDTO.setEmail(customerDTO.getEmail());
-                                existingCustomerDTO.setLastname(customerDTO.getLastname());
-                                existingCustomerDTO.setName(customerDTO.getName());
-                                existingCustomerDTO.setCompany(customerDTO.getCompany());
-                                return customerRepository.save(existingCustomerDTO)
-                                        .doOnSuccess(savedCustomer -> logger.info("Client successfully updated with ID {}.", id))
-                                        .then(Mono.just(ResponseEntity.ok().<Void>build()));
-                            });
-                })
+                .flatMap(existingCustomerDTO -> customer
+                        .flatMap(updatedCustomer -> {
+                            CustomerDTO customerDTO = customerMapper.toOpenApiCustomer(updatedCustomer);
+                            existingCustomerDTO.setDni(customerDTO.getDni());
+                            existingCustomerDTO.setCustomertype(customerDTO.getCustomertype());
+                            existingCustomerDTO.setEmail(customerDTO.getEmail());
+                            existingCustomerDTO.setLastname(customerDTO.getLastname());
+                            existingCustomerDTO.setName(customerDTO.getName());
+                            existingCustomerDTO.setCompany(customerDTO.getCompany());
+                            return customerRepository.save(existingCustomerDTO)
+                                    .doOnSuccess(savedCustomer -> logger.info("Client successfully updated with ID {}.", id))
+                                    .then(Mono.just(ResponseEntity.ok().<Void>build()));
+                        }))
                 .switchIfEmpty(Mono.fromRunnable(() -> logger.warn("Client not found for update with ID {}.", id))
                         .then(Mono.just(ResponseEntity.notFound().<Void>build())))
                 .onErrorResume(e -> {

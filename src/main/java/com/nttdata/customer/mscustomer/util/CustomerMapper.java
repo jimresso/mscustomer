@@ -1,4 +1,4 @@
-package com.nttdata.customer.mscustomer.Util;
+package com.nttdata.customer.mscustomer.util;
 
 import com.nttdata.customer.mscustomer.model.Company;
 import com.nttdata.customer.mscustomer.model.CustomerDTO;

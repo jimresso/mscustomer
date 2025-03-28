@@ -1,6 +1,5 @@
 package com.nttdata.customer.mscustomer.service;
 
-import com.nttdata.customer.mscustomer.model.CustomerDTO;
 import org.openapitools.model.Customer;
 import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Flux;
