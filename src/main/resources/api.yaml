@@ -1,0 +1,103 @@
+openapi: 3.0.4
+info:
+  version: 1.0.0
+  title: Customer Service API
+servers:
+  - url: http://localhost:8085
+paths:
+  /api/customers:
+    post:
+      summary: Create a new customer
+      operationId: createCustomer
+      tags:
+        - customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Customer"
+      responses:
+        '201':
+          description: Customer created successfully
+        '400':
+          description: Invalid data
+  /api/getcustomers:
+    get:
+      summary: Get all customers
+      operationId: getAllCustomers
+      tags:
+        - customer
+      responses:
+        '200':
+          description: List of customers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Customer"
+  /api/customers/{id}:
+    put:
+      summary: Update customer by ID
+      operationId: updateCustomer
+      tags:
+        - customer
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Customer"
+      responses:
+        '200':
+          description: Customer updated successfully
+        '404':
+          description: Customer not found
+    delete:
+      summary: Delete customer by ID
+      operationId: deleteCustomer
+      tags:
+        - customer
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Customer deleted successfully
+        '404':
+          description: Customer not found
+
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        id:
+          type: string
+        customertype:
+          type: string
+        name:
+          type: string
+        lastname:
+          type: string
+        email:
+          type: string
+        dni:
+          type: string
+        company:
+          type: object
+          properties:
+            ruc:
+              type: string
+            socialreason:
+              type: string
