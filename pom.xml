@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.nttdata.customer</groupId>
-	<artifactId>mscustomer</artifactId>
+	<artifactId>customer-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>mscustomer</name>
 	<description>Customer service</description>
