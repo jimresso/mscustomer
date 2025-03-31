@@ -1,0 +1,48 @@
+[{
+  "_id": {
+    "$oid": "67e6d24d86b7ac20dd7da54e"
+  },
+  "dni": "3333445",
+  "customertype": "personal",
+  "email": "edgar.ricardo@gmail.com",
+  "lastname": "figuera",
+  "name": "edgar",
+  "_class": "com.nttdata.customer.mscustomer.model.CustomerDTO"
+},
+{
+  "_id": {
+    "$oid": "67e6d2e225658d43a3a0a0ee"
+  },
+  "dni": "3333789",
+  "customertype": "personal",
+  "email": "juan.leiva@gmail.com",
+  "lastname": "leiva Prueba",
+  "name": "juan",
+  "_class": "com.nttdata.customer.mscustomer.model.CustomerDTO"
+},
+{
+  "_id": {
+    "$oid": "67e6d6748021d7113afd64ad"
+  },
+  "dni": "3333789",
+  "customertype": "personal",
+  "email": "juan.leiva@gmail.com",
+  "lastname": "leiva azunto",
+  "name": "juan",
+  "_class": "com.nttdata.customer.mscustomer.model.CustomerDTO"
+},
+{
+  "_id": {
+    "$oid": "661f4e5b8f1a233312345678"
+  },
+  "dni": "676789632",
+  "customertype": "personal",
+  "email": "ana.perez@gmail.com",
+  "lastname": "Pérez",
+  "name": "ana",
+  "company": {
+    "ruc": "1234337890",
+    "socialreason": "Mi Empresa"
+  },
+  "_class": "com.nttdata.customer.mscustomer.model.CustomerDTO"
+}]

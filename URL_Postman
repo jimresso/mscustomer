@@ -1,0 +1,36 @@
+[POS] Crear cuenta de cliente
+http://localhost:8085/api/customers
+{
+        "customertype": "personal",
+        "name": "matilda",
+        "lastname": "Pérez",
+        "email": "matilda.perez@gmail.com",
+        "dni": "676789456",
+        "company": {
+            "ruc": "1234334590",
+            "socialreason": "caffe"
+        }
+    }
+******************************************************
+[PUT] Actualizar registro del cliente por [ID]
+http://localhost:8085/api/customers/{id}
+ {
+        "id": "67e714d28a553a2d4b9bb21d",
+        "customertype": "personal",
+        "name": "matilda",
+        "lastname": "agora",
+        "email": "matilda.perez@gmail.com",
+        "dni": "676789456",
+        "company": {
+            "ruc": "1234334590",
+            "socialreason": "caffe"
+        }
+    }
+******************************************************
+[GET] Obtener una lista de todas los clientes
+http://localhost:8085/api/getcustomers
+******************************************************
+[DELETE] Borra Registro de un usuario a traves del [ID]
+http://localhost:8085/api/customers/{id}
+
+
