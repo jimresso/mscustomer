@@ -76,7 +76,8 @@ public class CustomerServiceImpl implements CustomerService {
                             existingCustomerDTO.setName(customerDTO.getName());
                             existingCustomerDTO.setCompany(customerDTO.getCompany());
                             return customerRepository.save(existingCustomerDTO)
-                                    .doOnSuccess(savedCustomer -> logger.info("Client successfully updated with ID {}.", id))
+                                    .doOnSuccess(savedCustomer ->
+                                            logger.info("Client successfully updated with ID {}.", id))
                                     .then(Mono.just(ResponseEntity.ok().<Void>build()));
                         }))
                 .switchIfEmpty(Mono.fromRunnable(() -> logger.warn("Client not found for update with ID {}.", id))
