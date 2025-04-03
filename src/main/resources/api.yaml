@@ -84,7 +84,7 @@ components:
       properties:
         id:
           type: string
-        customertype:
+        customerId:
           type: string
         name:
           type: string

@@ -70,7 +70,7 @@ public class CustomerServiceImpl implements CustomerService {
                         .flatMap(updatedCustomer -> {
                             CustomerDTO customerDTO = customerMapper.toOpenApiCustomer(updatedCustomer);
                             existingCustomerDTO.setDni(customerDTO.getDni());
-                            existingCustomerDTO.setCustomertype(customerDTO.getCustomertype());
+                            existingCustomerDTO.setCustomerId(customerDTO.getCustomerId());
                             existingCustomerDTO.setEmail(customerDTO.getEmail());
                             existingCustomerDTO.setLastname(customerDTO.getLastname());
                             existingCustomerDTO.setName(customerDTO.getName());

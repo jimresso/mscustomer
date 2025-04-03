@@ -13,7 +13,7 @@ public class CustomerDTO {
     @BsonId
     private String id;
     private String dni;
-    private String customertype;
+    private String customerId;
     private String email;
     private String lastname;
     private String name;

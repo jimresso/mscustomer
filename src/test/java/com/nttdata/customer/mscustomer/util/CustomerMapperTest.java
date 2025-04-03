@@ -35,7 +35,7 @@ class CustomerMapperTest {
         company.setSocialreason("Tech Corp");
         Customer customer = new Customer();
         customer.setId("1");
-        customer.setCustomertype("Company");
+        customer.setCustomerId("Company");
         customer.setName("John");
         customer.setLastname("Doe");
         customer.setEmail("email@example.com");

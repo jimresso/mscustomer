@@ -45,7 +45,7 @@ class CustomerControllerTest {
                 .dni("12345678")
                 .email("email@example.com")
                 .company(company)
-                .customertype("Type");
+                .customerId("Type");
         when(customerService.addCustomer(any())).thenReturn(Mono.just(ResponseEntity.status(HttpStatus.CREATED).build()));
         webTestClient.post().uri("/api/customers")
                 .bodyValue(customer)
@@ -62,7 +62,7 @@ class CustomerControllerTest {
                 .dni("12345678")
                 .email("email@example.com")
                 .company(company)
-                .customertype("Type");
+                .customerId("Type");
         when(customerService.listCustomers())
                 .thenReturn(Mono.just(ResponseEntity.ok(Flux.just(customer))));
         webTestClient.get().uri("/api/getcustomers")
@@ -82,7 +82,7 @@ class CustomerControllerTest {
                 .dni("12345678")
                 .email("email@example.com")
                 .company(company)
-                .customertype("Type");
+                .customerId("Type");
         when(customerService.modifyCustomer(eq("1"), any())).thenReturn(Mono.just(ResponseEntity.ok().build()));
         webTestClient.put().uri("/api/customers/1")
                 .bodyValue(customer)
