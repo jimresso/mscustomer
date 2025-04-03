@@ -17,13 +17,7 @@ public class CustomerDTO {
     private String email;
     private String lastname;
     private String name;
-    private ClienttypeEnum clienttype;
     private  Company company;
 
-
-    public enum ClienttypeEnum {
-        VIP,
-        PYME,
-    }
 
 }
