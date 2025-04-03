@@ -17,6 +17,8 @@ public class CustomerMapper {
         customer.setLastname(customerDTO.getLastname());
         customer.setEmail(customerDTO.getEmail());
         customer.setDni(customerDTO.getDni());
+        customer.setClienttype( Customer.ClienttypeEnum.valueOf(customerDTO.getClienttype().name()));
+
         if (customerDTO.getCompany() != null) {
             CustomerCompany company = new CustomerCompany();
             company.setRuc(customerDTO.getCompany().getRuc());
@@ -33,7 +35,7 @@ public class CustomerMapper {
         customerDTO.setEmail(customer.getEmail());
         customerDTO.setLastname(customer.getLastname());
         customerDTO.setName(customer.getName());
-
+        customerDTO.setClienttype(CustomerDTO.ClienttypeEnum.valueOf(customer.getClienttype().name()));
         if (customer.getCompany() != null) {
             Company company = new Company();
             company.setRuc(customer.getCompany().getRuc());
