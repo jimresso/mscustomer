@@ -2,6 +2,7 @@ package com.nttdata.customer.mscustomer.model;
 
 import lombok.*;
 import org.bson.codecs.pojo.annotations.BsonId;
+import org.openapitools.model.Customer;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
@@ -12,9 +13,11 @@ public class CustomerDTO {
     @BsonId
     private String id;
     private String dni;
-    private String customertype;
+    private String customerId;
     private String email;
     private String lastname;
     private String name;
     private  Company company;
+
+
 }

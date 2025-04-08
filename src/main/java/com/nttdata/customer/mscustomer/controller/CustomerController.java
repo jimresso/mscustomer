@@ -40,7 +40,10 @@ public class CustomerController implements ApiApi {
 
     @Override
     public Mono<ResponseEntity<Void>> createCustomer(
-            @Parameter(name = "Customer", description = "", required = true) @Valid @RequestBody Mono<Customer> customer,
+            @Parameter(name = "Customer",
+                    description = "",
+                    required = true)
+            @Valid @RequestBody Mono<Customer> customer,
             @Parameter(hidden = true) final ServerWebExchange exchange
     ) {
         logger.info("Starting create of client");
@@ -49,8 +52,10 @@ public class CustomerController implements ApiApi {
 
     @Override
     public Mono<ResponseEntity<Void>> updateCustomer(
-            @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") String id,
-            @Parameter(name = "Customer", description = "", required = true) @Valid @RequestBody Mono<Customer> customer,
+            @Parameter(name = "id", description = "",
+                    required = true, in = ParameterIn.PATH) @PathVariable("id") String id,
+            @Parameter(name = "Customer", description = "",
+                    required = true) @Valid @RequestBody Mono<Customer> customer,
             @Parameter(hidden = true) final ServerWebExchange exchange
     ) {
         logger.info("Starting update of client with ID: {}", id);

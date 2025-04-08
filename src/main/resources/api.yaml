@@ -84,7 +84,7 @@ components:
       properties:
         id:
           type: string
-        customertype:
+        customerId:
           type: string
         name:
           type: string
@@ -94,6 +94,7 @@ components:
           type: string
         dni:
           type: string
+          description: "Tipo de cliente: VIP o PYMEN"
         company:
           type: object
           properties:

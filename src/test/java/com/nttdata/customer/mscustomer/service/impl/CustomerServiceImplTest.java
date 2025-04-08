@@ -47,7 +47,7 @@ class CustomerServiceImplTest {
                 .dni("12345678")
                 .email("email@example.com")
                 .company(company)
-                .customertype("Type");
+                .customerId("Type");
         assertNotNull(customerDTO);
         when(customerRepository.findAll()).thenReturn(Flux.just(customerDTO));
         when(customerMapper.mapToCustomer(customerDTO)).thenReturn(customer);
@@ -87,7 +87,7 @@ class CustomerServiceImplTest {
                 .dni("12345678")
                 .email("email@example.com")
                 .company(company)
-                .customertype("Type");
+                .customerId("Type");
         when(customerMapper.toOpenApiCustomer(customer)).thenReturn(customerDTO);
         when(customerRepository.save(customerDTO)).thenReturn(Mono.just(customerDTO));
         StepVerifier.create(customerService.addCustomer(Mono.just(customer)))
@@ -105,7 +105,7 @@ class CustomerServiceImplTest {
         validCustomer.setEmail("email@example.com");
         validCustomer.setLastname("algo");
         validCustomer.setDni("74451");
-        validCustomer.setCustomertype("algo");
+        validCustomer.setCustomerId("algo");
          when(customerRepository.save(any(CustomerDTO.class))).thenReturn(Mono.error(new RuntimeException("Database error")));
         StepVerifier.create(customerService.addCustomer(Mono.just(validCustomer)))
                 .expectNextMatches(response -> response.getStatusCode() == HttpStatus.INTERNAL_SERVER_ERROR)
@@ -121,7 +121,7 @@ class CustomerServiceImplTest {
         validCustomer.setEmail("email@example.com");
         validCustomer.setLastname("algo");
         validCustomer.setDni("74451");
-        validCustomer.setCustomertype("algo");
+        validCustomer.setCustomerId("algo");
         StepVerifier.create(customerService.addCustomer(Mono.just(validCustomer)))
                 .expectNextMatches(response -> response.getStatusCode() == HttpStatus.BAD_REQUEST)
                 .verifyComplete();
@@ -143,7 +143,7 @@ class CustomerServiceImplTest {
                 .dni("12345678")
                 .email("email@example.com")
                 .company(company)
-                .customertype("Type");
+                .customerId("Type");
         CustomerDTO existingCustomerDTO = new CustomerDTO(customerId, "Old Name", "Old Lastname", "12345678", "oldemail@example.com", "OldCompany", companyDto);
         CustomerDTO updatedCustomerDTO = new CustomerDTO(customerId, "John", "Doe", "12345678", "email@example.com", "Company", companyDto);
 
