@@ -39,6 +39,11 @@ public class CustomerController implements ApiApi {
     }
 
     @Override
+    public Mono<ResponseEntity<Void>> deleteCustomerByCustomerId(String customerId, ServerWebExchange exchange) {
+        return customerService.removeCustomerId(customerId);
+    }
+
+    @Override
     public Mono<ResponseEntity<Void>> createCustomer(
             @Parameter(name = "Customer",
                     description = "",
