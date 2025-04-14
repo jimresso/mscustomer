@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(CustomerNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public Map<String, String> handleCustomerNotFound(CustomerNotFoundException ex) {
-        return Collections.singletonMap("error", ex.getMessage());
+        return Collections.singletonMap(ERROR, ex.getMessage());
     }
 
 }
