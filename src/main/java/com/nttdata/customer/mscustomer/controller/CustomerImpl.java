@@ -20,9 +20,9 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @RequiredArgsConstructor
-public class CustomerController implements ApiApi {
+public class CustomerImpl implements ApiApi {
     private final CustomerService customerService;
-    private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
+    private static final Logger logger = LoggerFactory.getLogger(CustomerImpl.class);
 
     @Override
     public Mono<ResponseEntity<Flux<Customer>>> getAllCustomers(ServerWebExchange exchange) {
