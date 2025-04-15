@@ -10,4 +10,5 @@ public interface CustomerService  {
     Mono<ResponseEntity<Void>> addCustomer(Mono<Customer> customer);
     Mono<ResponseEntity<Void>> modifyCustomer(String id, Mono<Customer> customer);
     Mono<ResponseEntity<Void>> removeCustomer(String id);
+    Mono<ResponseEntity<Void>> removeCustomerId(String customerId);
 }

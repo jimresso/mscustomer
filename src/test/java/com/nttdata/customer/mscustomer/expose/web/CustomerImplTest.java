@@ -1,4 +1,4 @@
-package com.nttdata.customer.mscustomer.controller;
+package com.nttdata.customer.mscustomer.expose.web;
 
 import com.nttdata.customer.mscustomer.service.CustomerService;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,19 +20,19 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class CustomerControllerTest {
+class CustomerImplTest {
 
     @Mock
     private CustomerService customerService;
 
     @InjectMocks
-    private CustomerController customerController;
+    private CustomerImpl customerImpl;
 
     private WebTestClient webTestClient;
 
     @BeforeEach
     void setUp() {
-        webTestClient = WebTestClient.bindToController(customerController).build();
+        webTestClient = WebTestClient.bindToController(customerImpl).build();
     }
 
     @Test

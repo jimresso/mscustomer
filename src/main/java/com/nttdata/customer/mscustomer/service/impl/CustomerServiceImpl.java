@@ -1,5 +1,6 @@
 package com.nttdata.customer.mscustomer.service.impl;
 
+import com.nttdata.customer.mscustomer.exception.CustomerNotFoundException;
 import com.nttdata.customer.mscustomer.util.CustomerMapper;
 import com.nttdata.customer.mscustomer.model.CustomerDTO;
 import com.nttdata.customer.mscustomer.repository.CustomerRepository;
@@ -43,25 +44,31 @@ public class CustomerServiceImpl implements CustomerService {
                 });
     }
 
-    @Override
-    public Mono<ResponseEntity<Void>> addCustomer(Mono<Customer> customer) {
-        return customer
-                .flatMap(c -> {
-                    if (hasInvalidFields(c)) {
-                        logger.warn("Invalid customer data: missing required fields");
-                        return Mono.just(ResponseEntity.badRequest().<Void>build());
-                    }
-                    return customerRepository.save(customerMapper.toOpenApiCustomer(c))
-                            .flatMap(savedCustomer -> {
-                                logger.info("Client successfully created with ID: {}", savedCustomer.getId());
-                                return Mono.just(ResponseEntity.status(HttpStatus.CREATED).<Void>build());
-                            });
-                }).onErrorResume(e -> {
-            logger.error("Error creating customer: {}", e.getMessage(), e);
-            return Mono.just(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).<Void>build());
-        });
-
-    }
+@Override
+public Mono<ResponseEntity<Void>> addCustomer(Mono<Customer> customer) {
+    return customer
+            .flatMap(c -> {
+                if (hasInvalidFields(c)) {
+                    logger.warn("Invalid customer data: missing required fields");
+                    return Mono.just(ResponseEntity.badRequest().<Void>build());
+                }
+                return customerRepository.findByCustomerId(c.getCustomerId())
+                        .flatMap(existing -> {
+                            logger.warn("Customer with ID {} already exists", c.getCustomerId());
+                            return Mono.just(ResponseEntity.status(HttpStatus.CONFLICT).<Void>build());
+                        })
+                        .switchIfEmpty(
+                                customerRepository.save(customerMapper.toOpenApiCustomer(c))
+                                        .flatMap(savedCustomer -> {
+                                            logger.info("Client successfully created with ID: {}", savedCustomer.getId());
+                                            return Mono.just(ResponseEntity.status(HttpStatus.CREATED).<Void>build());
+                                        })
+                        );
+            }).onErrorResume(e -> {
+                logger.error("Error creating customer: {}", e.getMessage(), e);
+                return Mono.just(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).<Void>build());
+            });
+}
 
     @Override
     public Mono<ResponseEntity<Void>> modifyCustomer(String id, Mono<Customer> customer) {
@@ -103,6 +110,16 @@ public class CustomerServiceImpl implements CustomerService {
                     return Mono.just(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).<Void>build());
                 });
     }
+
+    @Override
+    public Mono<ResponseEntity<Void>> removeCustomerId(String customerId) {
+        return customerRepository.findByCustomerId(customerId)
+                .flatMap(customer -> customerRepository.delete(customer)
+                        .then(Mono.just(ResponseEntity.noContent().<Void>build())))
+                .switchIfEmpty(Mono.error(
+                        new CustomerNotFoundException("Customer not found")));
+    }
+
 
     private boolean hasInvalidFields(Customer c) {
         return Stream.of(c.getName(), c.getLastname(), c.getDni(), c.getEmail())

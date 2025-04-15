@@ -2,7 +2,6 @@ package com.nttdata.customer.mscustomer.model;
 
 import lombok.*;
 import org.bson.codecs.pojo.annotations.BsonId;
-import org.openapitools.model.Customer;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data

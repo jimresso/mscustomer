@@ -76,6 +76,23 @@ paths:
           description: Customer deleted successfully
         '404':
           description: Customer not found
+  /api/delete/{customerId}:
+    delete:
+      summary: Delete customer by customerId
+      operationId: deleteCustomerByCustomerId
+      tags:
+        - customer
+      parameters:
+        - name: customerId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Customer deleted successfully
+        '404':
+          description: Customer not found
 
 components:
   schemas:
