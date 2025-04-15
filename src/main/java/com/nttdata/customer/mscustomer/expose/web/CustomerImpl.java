@@ -1,4 +1,4 @@
-package com.nttdata.customer.mscustomer.controller;
+package com.nttdata.customer.mscustomer.expose.web;
 
 
 import com.nttdata.customer.mscustomer.service.CustomerService;
